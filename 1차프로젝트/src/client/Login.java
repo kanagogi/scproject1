@@ -99,7 +99,7 @@ public class Login extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(null, "로그인 성공");
 					// 이 부분에서 로그인 창 지우고, 메인창 띄워야함.
 					this.dispose();
-					//new Account_BookGUI();
+					//new Account_BookGUI(); // commit test
 					new DreamClient();
 				}
 				else{
