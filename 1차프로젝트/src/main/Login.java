@@ -1,11 +1,12 @@
-package client;
+package main;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import server.LoginManager;
 import vo.*;
+import main.*;
+import manager.LoginManager;
 
 public class Login extends JFrame implements ActionListener{
 
@@ -100,7 +101,8 @@ public class Login extends JFrame implements ActionListener{
 					// 이 부분에서 로그인 창 지우고, 메인창 띄워야함.
 					this.dispose();
 					//new Account_BookGUI(); // commit test
-					new DreamClient();
+					//new DreamClient();
+					new Main();
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");

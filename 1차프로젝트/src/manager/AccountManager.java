@@ -1,6 +1,9 @@
-package vo;
+package manager;
 
 import java.util.ArrayList;
+
+import client.Account_BookGUI;
+import vo.Account_Book;
 
 public class AccountManager {
 	private Account_Book accountbook;

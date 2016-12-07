@@ -1,8 +1,9 @@
-package server;
+package manager;
 
 import java.sql.*;
 import java.util.ArrayList;
 
+import server.ConnectionManager;
 import vo.*;
 
 public class LoginManager {
