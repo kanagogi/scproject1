@@ -78,12 +78,13 @@ public class Login extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "이미 등록된 회원입니다.");
 			}
 			else{
-				User newUser = new User(newId, newPwd, new JOptionPane().showInputDialog("이름:")); 
-				boolean resultEnroll = loginManager.enrollUser(newUser);
-				if(resultEnroll == false){
+				String newName = JOptionPane.showInputDialog("이름: ");
+				if(newName == null){
 					JOptionPane.showMessageDialog(null, "등록실패");
 				}
 				else{
+					User newUser = new User(newId, newPwd, newName); 
+					boolean resultEnroll = loginManager.enrollUser(newUser);
 					JOptionPane.showMessageDialog(null, "등록성공");
 				}
 			}

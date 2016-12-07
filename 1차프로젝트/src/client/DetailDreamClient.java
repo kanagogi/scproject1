@@ -28,7 +28,6 @@ public class DetailDreamClient extends JFrame implements ActionListener{
 		// GUI 부분
 		this.setTitle("목표 상세화면");
 		this.setSize(500, 400);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		JPanel panel_1 = new JPanel();
 		getContentPane().add(panel_1, BorderLayout.NORTH);
