@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DreamClient extends JFrame implements ActionListener{
+	private String loginUser; 
+	
 	private JPanel DCpanel = new JPanel(); // 전체를 담는 패널
 	
 	private JTable table;
@@ -18,7 +20,8 @@ public class DreamClient extends JFrame implements ActionListener{
 	private JButton btnCreateDream;
 	private JPanel panel_1;
 	
-	public DreamClient() {
+	public DreamClient(String userID) {
+		loginUser = userID;
 		//this.setSize(500, 500);
 		//this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		GUIForDreamClient();
@@ -110,7 +113,7 @@ public class DreamClient extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		new DreamClient();
+		new DreamClient("1");
 
 	}
 
@@ -126,7 +129,7 @@ public class DreamClient extends JFrame implements ActionListener{
 		
 		//목표 생성 버튼
 		else if(e.getSource() == btnCreateDream){
-			new CreateDreamClient();
+			new CreateDreamClient(loginUser);
 		}
 		
 	}

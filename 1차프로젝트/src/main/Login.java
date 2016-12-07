@@ -102,7 +102,7 @@ public class Login extends JFrame implements ActionListener{
 					this.dispose();
 					//new Account_BookGUI(); // commit test
 					//new DreamClient();
-					new Main();
+					new Main(tf_id.getText());
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");

@@ -1,9 +1,13 @@
 package vo;
 
+import java.util.ArrayList;
+
 public class User {
 	private String id;
 	private int pwd;
 	private String name;
+	
+	private ArrayList<Dream> dreamList = new ArrayList<>();
 	
 	public User(String _id, int _pwd, String _name) {
 		id = _id;

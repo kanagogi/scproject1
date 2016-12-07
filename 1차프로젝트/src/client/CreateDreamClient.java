@@ -1,18 +1,36 @@
 package client;
 
 import javax.swing.*;
+
+import manager.DreamManager;
+import manager.LoginManager;
+import vo.Dream;
+import vo.User;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class CreateDreamClient extends JFrame implements ActionListener{
+	private String loginUser;
+	
+	private DreamManager dm = new DreamManager();
+	private LoginManager lm = new LoginManager();
+	
 	private JTextField tf_dreamName;
 	private JTextField tf_money;
-	private JTextField tf_period;
+	private JTextField tf_startDate;
 	private JButton btn_addMember;
 	private JButton btn_ok;
 	
-	public CreateDreamClient() {
+	private ArrayList<String> makingUserIDList = new ArrayList<>(); // 목표의 멤버들을 저장할 배열 
+	private JTextField tf_endDate;
+	
+	public CreateDreamClient(String userID) {
+		loginUser = userID;
+		
 		this.setTitle("목표생성창");
 		this.setSize(400, 200);
 		
@@ -46,9 +64,16 @@ public class CreateDreamClient extends JFrame implements ActionListener{
 		JLabel lbl_period = new JLabel("\uAE30\uAC04 : ");
 		panel_3.add(lbl_period);
 		
-		tf_period = new JTextField();
-		panel_3.add(tf_period);
-		tf_period.setColumns(10);
+		tf_startDate = new JTextField();
+		panel_3.add(tf_startDate);
+		tf_startDate.setColumns(10);
+		
+		JLabel lbl_temp = new JLabel("~");
+		panel_3.add(lbl_temp);
+		
+		tf_endDate = new JTextField();
+		panel_3.add(tf_endDate);
+		tf_endDate.setColumns(10);
 		
 		JPanel panel_btn = new JPanel();
 		getContentPane().add(panel_btn, BorderLayout.SOUTH);
@@ -68,16 +93,53 @@ public class CreateDreamClient extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btn_addMember){
-			System.out.println("add member");
+			String newMember = JOptionPane.showInputDialog("추가할 ID : ");
+			boolean findUser = lm.findUserById(newMember);
+			if(findUser){
+				boolean find = false;
+				for (String user : makingUserIDList) {
+					if(user.equals(newMember)){
+						find = true;
+						break;
+					}
+				}
+				// makingUserIDList 에 newMember 가 존재하지 않으면 리스트에 추가해줌.
+				if(find == false){
+					makingUserIDList.add(newMember);
+				}
+				
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "해당 ID가 존재하지 않습니다. 추가 등록 실패");
+			}
+			
 		}
 		
 		else if(e.getSource() == btn_ok){
-			System.out.println("dream ok");
+			makingUserIDList.add(loginUser);
+			String dreamName = tf_dreamName.getText();
+			int money = Integer.parseInt(tf_money.getText());
+			String startDate = tf_startDate.getText();
+			String endDate = tf_endDate.getText();
+			String dreamID = loginUser + ((Math.random()*10)+1); // 나중에 아이디 생성 함수 따로 생각해야 함.
+			
+			Dream newDream = new Dream(dreamID, dreamName, startDate, endDate, money, makingUserIDList);
+			
+			boolean resEnroll = dm.enrollDream(newDream);
+			// 이부분에 드림리스트 테이블에 작성해야함 여기부터좀 쓰세요 제발
+			
+			if(resEnroll){
+				JOptionPane.showMessageDialog(null, "목표가 등록 되었습니다.");
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "목표 등록 실패.");
+			}
+				
 		}
 		
 	}
 
 	public static void main(String[] args) {
-		
+		new CreateDreamClient("1");
 	}
 }

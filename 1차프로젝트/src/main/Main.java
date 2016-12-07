@@ -12,10 +12,14 @@ import client.DreamClient;
 import java.awt.GridLayout;
 
 public class Main extends JFrame{
+	private String loginUser;
+	
 	private Account_BookGUI accountbookgui;
 	private DreamClient dreamclient;
 	
-	public Main() {
+	public Main(String userID) {
+		loginUser = userID;
+		
 		this.setSize(1500, 800);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 3, 0, 0));
@@ -36,7 +40,7 @@ public class Main extends JFrame{
 		getContentPane().add(panel_4);
 		
 		JPanel panel_5 = new JPanel();
-		dreamclient = new DreamClient();
+		dreamclient = new DreamClient(loginUser);
 		JPanel panel_dreamclient = dreamclient.GUIForDreamClient();
 		panel_5 = panel_dreamclient;
 		getContentPane().add(panel_5);
@@ -49,7 +53,7 @@ public class Main extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		new Main();
+		new Main("1");
 
 	}
 
